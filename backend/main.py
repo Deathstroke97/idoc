@@ -2,10 +2,10 @@ from typing import Generator, List, Optional
 
 from fastapi import Depends, FastAPI, HTTPException, Query, status
 from pydantic import BaseModel, Field
-from sqlalchemy import Column, ForeignKey, Integer, String, create_engine, func, select
+from sqlalchemy import Column, ForeignKey, Integer, String, create_engine, func, select, text
 from sqlalchemy.orm import Session, declarative_base, relationship, selectinload, sessionmaker
 
-from .seed_data import CLINIC_NAMES, DOCTOR_NAMES
+from .seed_data import CLINIC_NAMES, DOCTOR_ENTRIES
 
 
 DATABASE_URL = "sqlite:///./database.sqlite3"
@@ -32,6 +32,7 @@ class Doctor(Base):
     id = Column(Integer, primary_key=True, index=True)
     clinic_id = Column(Integer, ForeignKey("clinics.id", ondelete="CASCADE"), nullable=False, index=True)
     name = Column(String, nullable=False)
+    specialty = Column(String, nullable=False)
 
     clinic = relationship("Clinic", back_populates="doctors")
 
@@ -64,6 +65,7 @@ class DoctorOut(BaseModel):
     id: int
     name: str
     clinic_id: int
+    specialty: str
 
     class Config:
         orm_mode = True
@@ -107,7 +109,16 @@ app = FastAPI(title="Medical Directory API", version="0.1.0")
 def on_startup() -> None:
     create_tables()
     with SessionLocal() as db:
+        ensure_specialty_column(db)
+    with SessionLocal() as db:
         seed_initial_data(db)
+
+
+def ensure_specialty_column(db: Session) -> None:
+    columns = [row[1] for row in db.execute(text("PRAGMA table_info(doctors);")).all()]
+    if "specialty" not in columns:
+        db.execute(text("ALTER TABLE doctors ADD COLUMN specialty VARCHAR NOT NULL DEFAULT 'General'"))
+        db.commit()
 
 
 def seed_initial_data(db: Session) -> None:
@@ -120,11 +131,12 @@ def seed_initial_data(db: Session) -> None:
         db.add(clinic)
         db.flush()  # obtain clinic.id
 
-        for doctor_name in DOCTOR_NAMES:
+        for entry in DOCTOR_ENTRIES:
             db.add(
                 Doctor(
-                    name=f"{doctor_name} ({clinic_name})",
+                    name=f"{entry['name']} ({clinic_name})",
                     clinic_id=clinic.id,
+                    specialty=entry["specialty"],
                 )
             )
 

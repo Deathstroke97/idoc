@@ -30,13 +30,13 @@ uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
 - OpenAPI JSON: http://localhost:8000/openapi.json
 
 ### API endpoints
-- `GET /clinics` — list clinics (with doctors); optional `q` search on clinic name.
-- `GET /doctors` — list doctors; optional `q` (name search) and `clinic_id` filter.
+- `GET /clinics` — list clinics (with doctors, including specialty); optional `q` search on clinic name.
+- `GET /doctors` — list doctors (each includes specialty); optional `q` (name search) and `clinic_id` filter.
 - `POST /make-appointmet` — create appointment with `clinic_id`, `doctor_id`, `date`, `time`, `user_name`, `user_phone`.
 
 ### Data and database
 - SQLite database: `backend/database.sqlite3` (auto-created).
-- On startup, seeds 10 clinics and 20 doctors per clinic if no clinics exist.
+- On startup, seeds 10 clinics and 20 doctors per clinic (with specialties) if no clinics exist.
 
 ### More info
 See `backend/backend.md` for detailed backend notes.

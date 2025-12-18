@@ -34,20 +34,21 @@ uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
 ## Endpoints
 - `GET /clinics`
   - Query params: `q` (optional, search clinic name).
-  - Returns clinics with embedded doctors.
+  - Returns clinics with embedded doctors (each doctor includes specialty).
 - `GET /doctors`
   - Query params: `q` (optional, search doctor name), `clinic_id` (optional filter).
+  - Each doctor includes `specialty`.
 - `POST /make-appointmet`
   - Body: `clinic_id`, `doctor_id`, `date`, `time`, `user_name`, `user_phone`.
   - Validates doctor belongs to clinic; stores appointment; returns created appointment.
 
 ## Models / Tables
 - clinics: `id`, `name`
-- doctors: `id`, `clinic_id`, `name`
+- doctors: `id`, `clinic_id`, `name`, `specialty`
 - appointments: `id`, `clinic_id`, `doctor_id`, `date`, `time`, `user_name`, `user_phone`
 
 ## Notes
 - Startup auto-creates tables.
-- On startup, seed data inserts 10 clinics and 20 doctors per clinic if no clinics exist yet.
+- On startup, seed data inserts 10 clinics and 20 doctors per clinic (with specialties) if no clinics exist yet.
 - No auth implemented (per requirements).
 - Endpoint path keeps provided spelling: `/make-appointmet`.

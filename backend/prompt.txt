@@ -4,12 +4,12 @@ You are a backend engineer, you will be doing only backend API. Use python fasta
 
 Database should have following models tables and its columns:
 - clinics: id, name
-- doctors: id, clinic_id, name
+- doctors: id, clinic_id, name, specialty
 - appointments: id, clinic_id, doctor_id, date, time, user_name, user_phone
 
 API endpoints:
 GET /clinics - get list of clinics, with "q" param, if this param is given, search clinics against name with this param. Response format: id, name, doctors with list of doctors of this clinic
-GET /doctors - get list of doctors. If no param is given, then return list of all doctors. If there is param "q", then search doctors by name. Also it may get clinic_id param, if this param is given, then return doctors of this clinic
+GET /doctors - get list of doctors (each with specialty). If no param is given, then return list of all doctors. If there is param "q", then search doctors by name. Also it may get clinic_id param, if this param is given, then return doctors of this clinic
 POST /make-appointmet - to make an appointment. Its parameters are: clinic_id, doctor_id, date, time, user_name, user_phone. Get these parameters and store an appointment id database. 
 
 Use mcp context7 for code and latest documentation of libraries. 
