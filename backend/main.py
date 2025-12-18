@@ -222,3 +222,30 @@ def make_appointment(payload: AppointmentCreate, db: Session = Depends(get_db)) 
 )
 def make_appointment_alias(payload: AppointmentCreate, db: Session = Depends(get_db)) -> AppointmentOut:
     return make_appointment(payload, db)
+
+
+@app.get("/appointments", response_model=List[AppointmentOut], summary="List appointments")
+def list_appointments(
+    user_phone: Optional[str] = Query(None, description="Filter appointments by user phone"),
+    db: Session = Depends(get_db),
+) -> List[AppointmentOut]:
+    stmt = select(Appointment)
+    if user_phone:
+        stmt = stmt.where(Appointment.user_phone == user_phone)
+    stmt = stmt.order_by(Appointment.id.desc())
+    appointments = db.scalars(stmt).all()
+    return appointments
+
+
+@app.delete(
+    "/appointments/{appointment_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    summary="Cancel appointment",
+)
+def cancel_appointment(appointment_id: int, db: Session = Depends(get_db)) -> None:
+    appointment = db.get(Appointment, appointment_id)
+    if not appointment:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Appointment not found")
+    db.delete(appointment)
+    db.commit()
+    return None

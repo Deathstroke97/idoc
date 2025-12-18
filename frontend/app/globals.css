@@ -23,7 +23,8 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-manrope), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: var(--font-manrope), system-ui, -apple-system, "Segoe UI",
+    sans-serif;
 }
 
 a {
@@ -153,15 +154,7 @@ body {
 }
 
 .hero::after {
-  content: "";
-  position: absolute;
-  inset: 10% auto -25% 55%;
-  width: 220px;
-  height: 220px;
-  background: var(--surface);
-  border-radius: 32px;
-  transform: rotate(-12deg);
-  border: 1px solid var(--border);
+  content: none;
 }
 
 .hero h1 {

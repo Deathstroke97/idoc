@@ -12,7 +12,8 @@ export type Clinic = {
 };
 
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") || "http://localhost:8000";
+  process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "") ||
+  "http://localhost:8000";
 
 async function handleJson<T>(res: Response): Promise<T> {
   if (!res.ok) {
@@ -51,6 +52,26 @@ export type AppointmentResponse = {
   user_name: string;
   user_phone: string;
 };
+
+export async function fetchAppointments(
+  userPhone?: string
+): Promise<AppointmentResponse[]> {
+  const query = userPhone ? `?user_phone=${encodeURIComponent(userPhone)}` : "";
+  const res = await fetch(`${API_BASE}/appointments${query}`, {
+    cache: "no-store",
+  });
+  return handleJson<AppointmentResponse[]>(res);
+}
+
+export async function cancelAppointment(appointmentId: number): Promise<void> {
+  const res = await fetch(`${API_BASE}/appointments/${appointmentId}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || res.statusText);
+  }
+}
 
 export async function createAppointment(
   payload: AppointmentPayload

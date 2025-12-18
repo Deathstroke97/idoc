@@ -15,6 +15,7 @@ export function Navbar() {
           <Link href="/">Home</Link>
           <Link href="/clinics">Clinics</Link>
           <Link href="/clinics">Book</Link>
+          <Link href="/appointments">My appointments</Link>
         </nav>
       </div>
     </header>
