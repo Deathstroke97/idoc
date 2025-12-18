@@ -1,6 +1,7 @@
 from typing import Generator, List, Optional
 
 from fastapi import Depends, FastAPI, HTTPException, Query, status
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from sqlalchemy import Column, ForeignKey, Integer, String, create_engine, func, select, text
 from sqlalchemy.orm import Session, declarative_base, relationship, selectinload, sessionmaker
@@ -104,6 +105,14 @@ class AppointmentOut(BaseModel):
 
 app = FastAPI(title="Medical Directory API", version="0.1.0")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.on_event("startup")
 def on_startup() -> None:
@@ -203,3 +212,13 @@ def make_appointment(payload: AppointmentCreate, db: Session = Depends(get_db)) 
     db.commit()
     db.refresh(appointment)
     return appointment
+
+
+@app.post(
+    "/make-appointment",
+    response_model=AppointmentOut,
+    status_code=status.HTTP_201_CREATED,
+    summary="Create appointment (alias for misspelling compatibility)",
+)
+def make_appointment_alias(payload: AppointmentCreate, db: Session = Depends(get_db)) -> AppointmentOut:
+    return make_appointment(payload, db)
