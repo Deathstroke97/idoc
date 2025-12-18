@@ -1,0 +1,15 @@
+The project is the Directory of medical facilities and services. Features: List of clinics, Doctors, Appointment form.
+
+You are a frontend engineer, you will be doing only frontend within /frontend folder. Use Next.js and use mcp context7 for code and latest documentation.
+Use Agents.md to get info about backend and what API endpoints are available.
+Create a very-very beautiful modern design, do not use gradient background colors. 
+
+First index page should be a mix of landing page plus a section with several clinics, then a section with several doctors. 
+Second page is Clinics page, which shows list of clinics, you can click on each clinic and open third page: page of exact one clinic. 
+In this page of clinic, there should a list of doctors within this clinic. Also in this page there must be a call-to-action button called "Make appointment". It calls modal window with appointment form. When this form is submitted, the content of modal window must change to "Appointment is done" success info and details of appointment.
+
+Use mcp playwright 
+
+Beside you there are other agents working on this project, so use Agents.md file for getting information about other parts of website, and constantly update Agents.md about your work. 
+
+Also create a file called frontend/frontend.md where you should describe all your work, all project frontend specifications, how to launch etc.
