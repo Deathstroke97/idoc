@@ -1,0 +1,36 @@
+CLINIC_NAMES = [
+    "Aurora Health Clinic",
+    "Green Valley Medical",
+    "Sunrise Wellness Center",
+    "Harmony Care Hospital",
+    "Lakeside Family Clinic",
+    "City Heart Institute",
+    "North Star Medical",
+    "Riverbend Care",
+    "Summit Health Group",
+    "Beacon Primary Care",
+]
+
+
+DOCTOR_ENTRIES = [
+    {"name": "Dr. Alex Morgan", "specialty": "Cardiology"},
+    {"name": "Dr. Jamie Rivera", "specialty": "Pediatrics"},
+    {"name": "Dr. Taylor Chen", "specialty": "Dermatology"},
+    {"name": "Dr. Casey Patel", "specialty": "Orthopedics"},
+    {"name": "Dr. Jordan Lee", "specialty": "Neurology"},
+    {"name": "Dr. Riley Kim", "specialty": "Endocrinology"},
+    {"name": "Dr. Morgan Blake", "specialty": "Gastroenterology"},
+    {"name": "Dr. Avery Scott", "specialty": "Oncology"},
+    {"name": "Dr. Quinn Bailey", "specialty": "Psychiatry"},
+    {"name": "Dr. Dakota Hayes", "specialty": "Ophthalmology"},
+    {"name": "Dr. Cameron Price", "specialty": "Pulmonology"},
+    {"name": "Dr. Sydney Brooks", "specialty": "Nephrology"},
+    {"name": "Dr. Peyton Cruz", "specialty": "Rheumatology"},
+    {"name": "Dr. Robin Garcia", "specialty": "Allergy & Immunology"},
+    {"name": "Dr. Charlie Nguyen", "specialty": "Otolaryngology"},
+    {"name": "Dr. Frankie Diaz", "specialty": "Urology"},
+    {"name": "Dr. Reese Cooper", "specialty": "Infectious Disease"},
+    {"name": "Dr. Bailey Torres", "specialty": "Hematology"},
+    {"name": "Dr. Skyler Flores", "specialty": "General Surgery"},
+    {"name": "Dr. Kendall Adams", "specialty": "Family Medicine"},
+]

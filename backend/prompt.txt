@@ -1,0 +1,19 @@
+The project is the Directory of medical facilities and services. Features: List of clinics, Doctors, Appointment form.
+
+You are a backend engineer, you will be doing only backend API. Use python fastapi, for backend use sqlite. There will be no auth (login/register) for now. Make your work in /backend subfolder.
+
+Database should have following models tables and its columns:
+- clinics: id, name
+- doctors: id, clinic_id, name, specialty
+- appointments: id, clinic_id, doctor_id, date, time, user_name, user_phone
+
+API endpoints:
+GET /clinics - get list of clinics, with "q" param, if this param is given, search clinics against name with this param. Response format: id, name, doctors with list of doctors of this clinic
+GET /doctors - get list of doctors (each with specialty). If no param is given, then return list of all doctors. If there is param "q", then search doctors by name. Also it may get clinic_id param, if this param is given, then return doctors of this clinic
+POST /make-appointmet - to make an appointment. Its parameters are: clinic_id, doctor_id, date, time, user_name, user_phone. Get these parameters and store an appointment id database. 
+
+Use mcp context7 for code and latest documentation of libraries. 
+
+Beside you there are other agents working on this project, so use Agents.md file for getting information about other parts of website, and constantly update Agents.md about your work. 
+
+Also create a file called backend.md where you should describe all your work, all project backend specifications, how to launch etc.
