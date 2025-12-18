@@ -1,0 +1,12 @@
+# E2E Tests Directory
+
+This directory will contain end-to-end tests for the project.
+
+Expected structure:
+- `clinics-list.spec.ts` — тест списка клиник
+- `services-list.spec.ts` — тест списка услуг
+- `doctors-list.spec.ts` — тест списка врачей
+- `appointment-form.spec.ts` — тест формы записи
+- `ai-chat.spec.ts` — тест AI чата (опционально)
+- `ai-fallback.spec.ts` — тест fallback механизма (опционально)
+
