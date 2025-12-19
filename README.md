@@ -42,3 +42,7 @@ uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
 
 ### More info
 See `backend/backend.md` for detailed backend notes.
+
+
+npm run dev -- --hostname 0.0.0.0 --port 3000
+uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
